@@ -10,17 +10,11 @@ class HomeController < ApplicationController
       lat = city["lat"]
       long = city["long"]
 
-      @weather = WeatherService.fetch_data(lat, long) if lat.present? && long.present?
+      forecast = WeatherService.fetch_data(lat, long) if lat.present? && long.present?
 
-      # if @weather.present?
-      #   @weather["list"].map do |weather|
-      #     {
-      #       date: weather["dt_txt"],
-      #       temperature: weather["main"]["temp"],
-      #       description: weather["weather"].first["description"]
-      #     }
-      #   end
-      # end
+      if forecast.present?
+        @data =  forecast["list"]
+      end
     end
   end
 end

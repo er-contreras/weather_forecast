@@ -1,19 +1,25 @@
 <h1>Forecast for the destinations available in Reservamos</h1>
 
 <%= form_with url: "/search", method: :get do |form| %>
-  <%= form.label :query, "Search for a city name:" %>
+  <%= form.label :query, "Search city by name:" %>
   <br>
   <%= form.text_field :query %>
   <%= form.submit "Search" %>
 <% end %>
 
-<% if @cities %>
-  <h2>Forecast for</h2>
-  <ul>
-    <% @cities.each do |forecast| %>
-      <li>
-        <%= forecast["dt_txt"] %>: <%= forecast["weather"].first["description"] %>
-      </li>
+<% if @data %>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Min</th>
+      <th>Max</th>
+    </tr>
+    <% @data.each do |weather| %>
+      <tr>
+        <td><%= Time.at(weather["dt"]).strftime("%A, %b %d, %Y %I:%M %p") %></td>
+        <td><%= weather["main"]["temp_min"] %>ºC</td>
+        <td><%= weather["main"]["temp_max"] %>ºC</td>
+      </tr>
     <% end %>
-  </ul>
+  </table>
 <% end %>
