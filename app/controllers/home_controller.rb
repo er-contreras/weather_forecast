@@ -14,6 +14,7 @@ class HomeController < ApplicationController
 
       if forecast.present?
         @data =  forecast["list"]
+        @city_name = forecast["city"]["name"]
       end
     end
   end

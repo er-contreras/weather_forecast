@@ -1,5 +1,6 @@
 <div class="container">
   <h1>Forecast for the destinations available in Reservamos</h1>
+  <span><%= @city_name %></span>
 
   <%= form_with url: "/search", method: :get do |form| %>
     <%= form.label :query, "Search city by name:" %>
@@ -10,18 +11,23 @@
 
   <% if @data %>
     <table>
-      <tr>
-        <th>Date</th>
-        <th>Min</th>
-        <th>Max</th>
-      </tr>
+      <% previous_day = nil %>
       <% @data.each do |weather| %>
+        <% current_day = Time.at(weather["dt"]).strftime("%A") %>
+        <% if current_day != previous_day %>
+          <tr>
+            <th><%= current_day %></th>
+            <th>Min</th>
+            <th>Max</th>
+          </tr>
+          <% previous_day = current_day %>
+        <% end %>
         <tr>
-          <td><%= Time.at(weather["dt"]).strftime("%A, %b %d, %Y %I:%M %p") %></td>
-          <td><%= weather["main"]["temp_min"] %>ºC</td>
-          <td><%= weather["main"]["temp_max"] %>ºC</td>
+          <td><%= Time.at(weather["dt"]).strftime("%H:%M") %></td>
+          <td><%= weather["main"]["temp_min"] %>°C</td>
+          <td><%= weather["main"]["temp_max"] %>°C</td>
         </tr>
       <% end %>
     </table>
-    </div>
   <% end %>
+</div>
