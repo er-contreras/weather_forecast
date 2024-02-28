@@ -37,4 +37,5 @@
 5. You can search for a city and see the weather forecast for the next 5 days.
 
 6. Enjoy!
-![Screenshot 2024-02-28 at 12 56 10](https://github.com/er-contreras/weather_forecast/assets/67211919/dced7a2a-cb75-41a4-ba8b-6ac25262825c)
+![Screenshot 2024-02-28 at 15 48 14](https://github.com/er-contreras/weather_forecast/assets/67211919/388e060c-bfd6-4cd5-8932-47601125eb11)
+
