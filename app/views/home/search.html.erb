@@ -18,6 +18,7 @@
             <th><%= current_day %></th>
             <th>Min</th>
             <th>Max</th>
+            <th>Humidity</th>
           </tr>
           <% previous_day = current_day %>
         <% end %>
@@ -25,6 +26,7 @@
           <td><%= Time.at(weather["dt"]).strftime("%H:%M") %></td>
           <td><%= weather["main"]["temp_min"] %>°C</td>
           <td><%= weather["main"]["temp_max"] %>°C</td>
+          <td><%= weather["main"]["humidity"] %>%</td>
         </tr>
       <% end %>
     </table>

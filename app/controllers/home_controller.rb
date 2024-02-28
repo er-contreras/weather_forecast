@@ -3,18 +3,15 @@ class HomeController < ApplicationController
     query = params[:query]
 
     if query.present?
-      data = ApiService.fetch_data(query)
+      data = LocationService.fetch_city_data(query)
+      city_data = data.find { |city| city if city["result_type"] == "city" } if data.present?
 
-      city = data.find { |city| city if city["result_type"] == "city" } if data.present?
-
-      lat = city["lat"]
-      long = city["long"]
-
-      forecast = WeatherService.fetch_data(lat, long) if lat.present? && long.present?
-
-      if forecast.present?
-        @data =  forecast["list"]
-        @city_name = forecast["city"]["name"]
+      if city_data.present?
+        weather_forecast = WeatherService.fetch_forecast(city_data)
+        if weather_forecast.present?
+          @data = weather_forecast.list
+          @city_name = weather_forecast.city_name
+        end
       end
     end
   end
