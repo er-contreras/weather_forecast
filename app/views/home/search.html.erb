@@ -1,25 +1,27 @@
-<h1>Forecast for the destinations available in Reservamos</h1>
+<div class="container">
+  <h1>Forecast for the destinations available in Reservamos</h1>
 
-<%= form_with url: "/search", method: :get do |form| %>
-  <%= form.label :query, "Search city by name:" %>
-  <br>
-  <%= form.text_field :query %>
-  <%= form.submit "Search" %>
-<% end %>
+  <%= form_with url: "/search", method: :get do |form| %>
+    <%= form.label :query, "Search city by name:" %>
+    <br>
+    <%= form.text_field :query %>
+    <%= form.submit "Search" %>
+  <% end %>
 
-<% if @data %>
-  <table>
-    <tr>
-      <th>Date</th>
-      <th>Min</th>
-      <th>Max</th>
-    </tr>
-    <% @data.each do |weather| %>
+  <% if @data %>
+    <table>
       <tr>
-        <td><%= Time.at(weather["dt"]).strftime("%A, %b %d, %Y %I:%M %p") %></td>
-        <td><%= weather["main"]["temp_min"] %>ºC</td>
-        <td><%= weather["main"]["temp_max"] %>ºC</td>
+        <th>Date</th>
+        <th>Min</th>
+        <th>Max</th>
       </tr>
-    <% end %>
-  </table>
-<% end %>
+      <% @data.each do |weather| %>
+        <tr>
+          <td><%= Time.at(weather["dt"]).strftime("%A, %b %d, %Y %I:%M %p") %></td>
+          <td><%= weather["main"]["temp_min"] %>ºC</td>
+          <td><%= weather["main"]["temp_max"] %>ºC</td>
+        </tr>
+      <% end %>
+    </table>
+    </div>
+  <% end %>
