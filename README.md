@@ -9,7 +9,7 @@
 
    `DATABASE_PASSWORD=postgres`
 
-WEATHER_API_KEY=0eebd1fcf852d29ca0340c5c451d4c9a
+    `WEATHER_API_KEY=0eebd1fcf852d29ca0340c5c451d4c9a`
 
 3. Open Docker and run the following command in the terminal:
     * If you don't have installed Docker, you can download it from [here](https://www.docker.com/products/docker-desktop) its free.
