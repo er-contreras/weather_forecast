@@ -1,11 +1,9 @@
-require 'uri'
-require 'net/http'
+module WeatherService
+  BASE_URL = URI('https://api.openweathermap.org/data/2.5/forecast')
+  API_KEY = ENV['WEATHER_API_KEY']
 
-module ApiService
-  BASE_URL = URI('https://search.reservamos.mx/api/v2/places')
-
-  def self.fetch_data(city)
-    url = URI("#{BASE_URL}?q=#{city}")
+  def self.fetch_data(lat, lon)
+    url = URI("#{BASE_URL}?lat=#{lat}&lon=#{lon}&appid=#{API_KEY}&units=metric")
     response = Net::HTTP.get_response(url)
 
     if response.is_a?(Net::HTTPSuccess)
