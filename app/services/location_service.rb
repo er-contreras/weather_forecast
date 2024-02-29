@@ -5,7 +5,7 @@ module LocationService
   BASE_URL = URI('https://search.reservamos.mx/api/v2/places')
 
   def self.fetch_city_data(city)
-    url = BASE_URL + "?q=#{URI.encode_www_form_component(city)}"
+    url = URI("#{BASE_URL}?q=#{city}")
     response = Net::HTTP.get_response(url)
 
     handle_response(response)
