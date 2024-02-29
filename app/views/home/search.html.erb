@@ -12,22 +12,26 @@
     <table>
       <% previous_day = nil %>
       <% @data.each do |weather| %>
-        <% current_day = Time.at(weather["dt"]).strftime("%A") %>
-        <% if current_day != previous_day %>
+        <% if weather.present? && weather["dt"].present? %>
+          <% current_day = Time.at(weather["dt"]).strftime("%A") %>
+          <% if current_day != previous_day %>
+            <tr>
+              <th><%= current_day %></th>
+              <th>Min</th>
+              <th>Max</th>
+              <th>Humidity</th>
+            </tr>
+            <% previous_day = current_day %>
+          <% end %>
           <tr>
-            <th><%= current_day %></th>
-            <th>Min</th>
-            <th>Max</th>
-            <th>Humidity</th>
+            <td><%= Time.at(weather["dt"]).strftime("%H:%M") %></td>
+            <td><%= weather["main"]["temp_min"] %>°C</td>
+            <td><%= weather["main"]["temp_max"] %>°C</td>
+            <td><%= weather["main"]["humidity"] %>%</td>
           </tr>
-          <% previous_day = current_day %>
+        <% else %>
+          <p>No weather data available</p>
         <% end %>
-        <tr>
-          <td><%= Time.at(weather["dt"]).strftime("%H:%M") %></td>
-          <td><%= weather["main"]["temp_min"] %>°C</td>
-          <td><%= weather["main"]["temp_max"] %>°C</td>
-          <td><%= weather["main"]["humidity"] %>%</td>
-        </tr>
       <% end %>
     </table>
   <% end %>

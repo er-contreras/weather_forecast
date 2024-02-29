@@ -6,7 +6,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/usr/src/app
-    command: rails s -b 0.0.0.0 && rm -f /usr/src/app/tmp/pids/server.pid
+    command: "rails s -b 0.0.0.0 && rm -rf /usr/src/app/tmp/pids/server.pid"
     env_file:
       - .env
     depends_on:
