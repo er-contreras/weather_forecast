@@ -7,7 +7,7 @@ class HomeController < ApplicationController
       city_data = data.find { |city| city if city["result_type"] == "city" } if data.present?
 
       if city_data.present?
-        weather_forecast = WeatherService.fetch_forecast(city_data)
+        weather_forecast = WeatherService.fetch_forecast(city_data, ENV['WEATHER_API_KEY'])
         if weather_forecast.present?
           @data = weather_forecast.list
           @city_name = weather_forecast.city_name

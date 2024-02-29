@@ -3,12 +3,11 @@ require 'json'
 
 module WeatherService
   BASE_URL = URI('https://api.openweathermap.org/data/2.5/forecast')
-  API_KEY = ENV['WEATHER_API_KEY']
 
-  def self.fetch_forecast(city_data)
+  def self.fetch_forecast(city_data, api_key)
     lat = city_data['lat']
     lon = city_data['long']
-    url = URI("#{BASE_URL}?lat=#{lat}&lon=#{lon}&appid=#{API_KEY}&units=metric")
+    url = URI("#{BASE_URL}?lat=#{lat}&lon=#{lon}&appid=#{api_key}&units=metric")
     response = Net::HTTP.get_response(url)
 
     if response.is_a?(Net::HTTPSuccess)
