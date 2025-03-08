@@ -1,12 +1,13 @@
 services:
   web:
     build:
+      context: ./
       dockerfile: Dockerfile-dev
     ports:
       - "3000:3000"
     volumes:
       - .:/usr/src/app
-    command: "rails s -b 0.0.0.0 && rm -rf /usr/src/app/tmp/pids/server.pid"
+    command: "rails s -b 0.0.0.0"
     env_file:
       - .env
     depends_on:
